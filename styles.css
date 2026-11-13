@@ -1,0 +1,135 @@
+/* ============ Estilos — pensados primero para el teléfono ============ */
+:root {
+  --azul: #e1abed;                /* tu color, en hexadecimal */
+  --fondo: #f3f6fa;
+  --texto: #1d2733;
+  --gris: #6b7785;
+  --borde: #d5dde6;
+  --verde: #1e8e3e;
+  --amarillo: #f2b705;
+  --naranja: #e8710a;
+  --rojo: #c5221f;
+  --radio: 12px;
+}
+
+* { box-sizing: border-box; }
+
+body {
+  margin: 0;
+  font-family: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+  background: var(--fondo);
+  color: var(--texto);
+  /* respeta la "muesca" del iPhone */
+  padding-bottom: env(safe-area-inset-bottom);
+}
+
+.barra {
+  background: var(--azul);
+  color: #fff;
+  padding: calc(14px + env(safe-area-inset-top)) 16px 14px;
+}
+.barra h1 { margin: 0; font-size: 1.4rem; }
+.barra p  { margin: 2px 0 0; opacity: .85; font-size: .9rem; }
+
+.aviso {
+  background: #fff4ce;
+  border-bottom: 1px solid #f0d77a;
+  padding: 8px 16px;
+  font-size: .82rem;
+}
+
+main { max-width: 560px; margin: 0 auto; padding: 16px; }
+
+.campo { display: block; margin-bottom: 14px; border: 0; padding: 0; }
+.campo span, legend { display: block; font-weight: 600; margin-bottom: 6px; font-size: .92rem; }
+.campo small { color: var(--gris); font-weight: 400; }
+
+input[type="number"], input[type="text"] {
+  width: 100%;
+  font-size: 1.25rem;            /* ≥16px evita el zoom automático en iPhone */
+  padding: 12px;
+  border: 1.5px solid var(--borde);
+  border-radius: var(--radio);
+  background: #fff;
+}
+input:focus { outline: 3px solid #9fc5e8; border-color: var(--azul); }
+input.invalido { border-color: var(--rojo); background: #fdecea; }
+
+.rejilla { display: grid; grid-template-columns: 1fr 1fr; gap: 0 12px; align-items: end; }
+
+.error { display: block; color: var(--rojo); font-size: .8rem; font-style: normal; min-height: 1em; }
+
+.segmentos { display: flex; gap: 6px; }
+.segmentos button {
+  flex: 1;
+  min-height: 48px;              /* objetivo táctil grande (uso con guantes) */
+  font-size: 1.05rem;
+  border: 1.5px solid var(--borde);
+  border-radius: var(--radio);
+  background: #fff;
+  color: var(--texto);
+}
+.segmentos button.activo { background: var(--azul); color: #fff; border-color: var(--azul); }
+.ayuda { display: block; color: var(--gris); margin-top: 6px; font-size: .78rem; }
+
+.casilla { display: flex; gap: 10px; align-items: flex-start; font-size: .88rem; margin: 6px 0 18px; }
+.casilla input { width: 22px; height: 22px; margin: 0; }
+
+.boton-principal, .boton-secundario {
+  width: 100%;
+  min-height: 54px;
+  font-size: 1.1rem;
+  font-weight: 700;
+  border: 0;
+  border-radius: var(--radio);
+  background: var(--azul);
+  color: #fff;
+}
+.boton-secundario { background: #fff; color: var(--azul); border: 1.5px solid var(--azul); margin-top: 12px; }
+.boton-texto { background: none; border: 0; color: var(--rojo); padding: 8px 0; font-size: .9rem; }
+
+/* ---------- Resultado con semáforo ---------- */
+.resultado {
+  margin-top: 20px;
+  padding: 18px;
+  border-radius: var(--radio);
+  background: #fff;
+  border-left: 10px solid var(--gris);
+  box-shadow: 0 2px 8px rgba(0,0,0,.06);
+}
+.oculto { display: none; }
+.puntaje { display: flex; align-items: baseline; gap: 8px; }
+.puntaje span { font-size: 3.2rem; font-weight: 800; line-height: 1; }
+.resultado h2 { margin: 8px 0 4px; font-size: 1.2rem; }
+.resultado p  { margin: 0 0 12px; }
+
+.nivel-cero       { border-left-color: var(--verde); }
+.nivel-bajo       { border-left-color: var(--verde); }
+.nivel-bajo-medio { border-left-color: var(--amarillo); }
+.nivel-medio      { border-left-color: var(--naranja); }
+.nivel-alto       { border-left-color: var(--rojo); background: #fdecea; }
+
+.detalle { width: 100%; border-collapse: collapse; font-size: .9rem; }
+.detalle td { padding: 6px 4px; border-top: 1px solid var(--borde); }
+.detalle td:last-child { text-align: right; font-weight: 700; }
+.detalle tr.tres td { color: var(--rojo); }
+
+/* ---------- Historial ---------- */
+.historial { margin-top: 28px; }
+.historial h2 { font-size: 1rem; }
+.historial ul { list-style: none; padding: 0; margin: 0; }
+.historial li {
+  background: #fff;
+  border-radius: 10px;
+  padding: 10px 12px;
+  margin-bottom: 8px;
+  display: flex;
+  justify-content: space-between;
+  font-size: .9rem;
+  border-left: 6px solid var(--gris);
+}
+.historial li.vacio { color: var(--gris); border-left-color: transparent; }
+
+footer { text-align: center; color: var(--gris); font-size: .75rem; padding: 24px 16px 32px; }
+ .logo { float: right; height: 44px; background: #fff; border-radius: 8px; padding: 4px; }
+ 

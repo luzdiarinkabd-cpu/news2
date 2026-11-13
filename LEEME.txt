@@ -1,0 +1,15 @@
+TALLER PWA — ALERTA NEWS2 (versión para alumnos)
+
+1. Abre index.html con doble clic para ver la app en tu navegador.
+2. Abre pruebas.html: verás cuántas pruebas pasan (al inicio, pocas).
+3. Completa en orden los TODO:
+   - news2.js  → TODO 2 a 8 (lógica clínica; el TODO 1, frecuencia respiratoria, ya está resuelto como ejemplo)
+   - app.js    → TODO 9 (validación de datos)
+   - manifest.json → pon el nombre de tu app (campos "name" y "short_name")
+4. Recarga pruebas.html después de cada TODO. Meta: todas en verde.
+5. Sube TODOS los archivos (incluida la carpeta icons) a tu repositorio de GitHub y activa GitHub Pages.
+6. Abre la dirección en tu teléfono e instálala:
+   - iPhone (Safari): Compartir → Agregar a pantalla de inicio
+   - Android (Chrome): menú ⋮ → Instalar app / Agregar a pantalla principal
+
+Uso educativo. No es un dispositivo médico validado.

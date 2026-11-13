@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>Hospital de la Luz · La Salle</title>  
+  <meta name="description" content="Calculadora educativa de NEWS2 para signos vitales">
+
+  <!-- PWA: manifiesto e íconos -->
+  <link rel="manifest" href="manifest.json">
+  <meta name="theme-color" content="#e1abed",> //cambio
+  <link rel="icon" href="icons/icon-192.png">
+
+  <!-- iPhone: ícono y modo pantalla completa al instalar -->
+  <link rel="apple-touch-icon" href="icons/apple-touch-icon.png">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="HospideLuz" content="Hospital de la Luz">  //cambio
+  <meta name="apple-mobile-web-app-status-bar-style" content="default">
+
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <header class="barra">
+    <img src="iconslogo.png" alt="Logo" class="logo">
+    <h1>Hospital de la Luz</h1>  
+    <p>La Salle · Signos vitales</p>
+  </header>
+
+  <div class="aviso">
+    <strong>Uso educativo.</strong> Software de práctica; no sustituye el juicio clínico ni es un dispositivo médico validado.
+  </div>
+
+  <main>
+    <form id="formulario" novalidate>
+      <label class="campo">
+        <span>Cama / ID (opcional, sin nombre del paciente)</span>
+        <input id="cama" type="text" maxlength="12" placeholder="Ej. 3B-12" autocomplete="off">
+      </label>
+
+      <div class="rejilla">
+        <label class="campo">
+          <span>Frec. respiratoria <small>resp/min</small></span>
+          <input id="fr" type="number" inputmode="numeric" placeholder="16" required>
+          <em class="error" data-para="fr"></em>
+        </label>
+
+        <label class="campo">
+          <span>SpO₂ <small>%</small></span>
+          <input id="spo2" type="number" inputmode="numeric" placeholder="97" required>
+          <em class="error" data-para="spo2"></em>
+        </label>
+
+        <label class="campo">
+          <span>T/A sistólica <small>mmHg</small></span>
+          <input id="tas" type="number" inputmode="numeric" placeholder="120" required>
+          <em class="error" data-para="tas"></em>
+        </label>
+
+        <label class="campo">
+          <span>Frec. cardiaca <small>lpm</small></span>
+          <input id="fc" type="number" inputmode="numeric" placeholder="80" required>
+          <em class="error" data-para="fc"></em>
+        </label>
+
+        <label class="campo">
+          <span>Temperatura <small>°C</small></span>
+          <input id="temp" type="number" inputmode="decimal" step="0.1" placeholder="36.8" required>
+          <em class="error" data-para="temp"></em>
+        </label>
+      </div>
+
+      <fieldset class="campo">
+        <legend>¿Oxígeno suplementario?</legend>
+        <div class="segmentos" data-grupo="oxigeno">
+          <button type="button" data-valor="no" class="activo">Aire ambiente</button>
+          <button type="button" data-valor="si">Con oxígeno</button>
+        </div>
+      </fieldset>
+
+      <fieldset class="campo">
+        <legend>Nivel de conciencia (ACVPU)</legend>
+        <div class="segmentos" data-grupo="conciencia">
+          <button type="button" data-valor="A" class="activo" title="Alerta">A</button>
+          <button type="button" data-valor="C" title="Confusión nueva">C</button>
+          <button type="button" data-valor="V" title="Responde a la voz">V</button>
+          <button type="button" data-valor="P" title="Responde al dolor">P</button>
+          <button type="button" data-valor="U" title="No responde">U</button>
+        </div>
+        <small class="ayuda">A Alerta · C Confusión nueva · V Voz · P Dolor · U No responde</small>
+      </fieldset>
+
+      <label class="casilla">
+        <input id="escala2" type="checkbox">
+        <span>Usar Escala 2 de SpO₂ (solo EPOC con hipercapnia, por indicación médica)</span>
+      </label>
+
+      <button type="submit" class="boton-principal">Calcular NEWS2</button>
+    </form>
+
+    <section id="resultado" class="resultado oculto" aria-live="polite">
+      <div class="puntaje">
+        <span id="total">0</span>
+        <small>puntos</small>
+      </div>
+      <h2 id="etiqueta"></h2>
+      <p id="respuesta"></p>
+      <table class="detalle">
+        <tbody id="detalle"></tbody>
+      </table>
+      <button type="button" id="guardar" class="boton-secundario">Guardar en historial</button>
+    </section>
+
+    <section class="historial">
+      <h2>Historial en este teléfono</h2>
+      <ul id="lista-historial"><li class="vacio">Sin registros.</li></ul>
+      <button type="button" id="borrar" class="boton-texto">Borrar historial</button>
+    </section>
+  </main>
+
+  <footer>
+    Tarea · Desarrollo de Software Médico · Ingeniería Biomédica<br>
+    Referencia: Royal College of Physicians, NEWS2 (2017)
+  </footer>
+
+  <script src="news2.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>

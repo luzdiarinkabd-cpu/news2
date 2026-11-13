@@ -1,0 +1,17 @@
+{
+  "name": "Alerta NEWS2 — Signos vitales",
+  "short_name": "Hospital de la Luz",
+  "description": "Calculadora educativa de la escala de alerta temprana NEWS2",
+  "lang": "es-MX",
+  "start_url": "./",
+  "scope": "./",
+  "display": "standalone",
+  "orientation": "portrait",
+  "background_color": "#f3f6fa",
+  "theme_color": "#e1abed", //cambio
+  "icons": [
+    { "src": "icons/icon-192.png", "sizes": "192x192", "type": "image/png" },
+    { "src": "icons/icon-512.png", "sizes": "512x512", "type": "image/png" },
+    { "src": "icons/icon-512.png", "sizes": "512x512", "type": "image/png", "purpose": "maskable" }
+  ]
+}

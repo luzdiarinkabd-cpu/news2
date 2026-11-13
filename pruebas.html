@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Pruebas NEWS2</title>
+  <style>
+    body { font-family: system-ui, sans-serif; max-width: 760px; margin: 0 auto; padding: 16px; color: #1d2733; }
+    h1 { font-size: 1.4rem; }
+    .resumen { font-size: 1.2rem; font-weight: 700; padding: 12px; border-radius: 10px; }
+    .ok   { background: #e6f4ea; color: #1e8e3e; }
+    .mal  { background: #fdecea; color: #c5221f; }
+    table { width: 100%; border-collapse: collapse; font-size: .88rem; margin-bottom: 24px; }
+    th, td { text-align: left; padding: 6px; border-bottom: 1px solid #d5dde6; }
+    td.r { font-weight: 700; }
+  </style>
+</head>
+<body>
+  <h1>Pruebas automáticas — NEWS2</h1>
+  <p>Cada fila compara lo que <b>calcula el código</b> contra lo que <b>esperamos</b> según la tabla oficial.
+     Meta del taller: que todo quede en verde.</p>
+  <div id="resumen" class="resumen"></div>
+
+  <h2>Valores frontera (cada parámetro)</h2>
+  <table><thead><tr><th>Función</th><th>Entrada</th><th>Esperado</th><th>Obtenido</th><th></th></tr></thead>
+    <tbody id="t-frontera"></tbody></table>
+
+  <h2>Casos clínicos</h2>
+  <table><thead><tr><th>Caso</th><th>Esperado</th><th>Obtenido</th><th></th></tr></thead>
+    <tbody id="t-casos"></tbody></table>
+
+  <script src="news2.js"></script>
+  <script src="casos.js"></script>
+  <script>
+    let pasan = 0, total = 0;
+    const marca = ok => { total++; if (ok) pasan++; return ok ? '✅' : '❌'; };
+
+    document.getElementById('t-frontera').innerHTML = CASOS_FRONTERA.map(([fn, entrada, esperado]) => {
+      let obtenido;
+      try { obtenido = NEWS2[fn](entrada); } catch (e) { obtenido = 'Error: ' + e.message; }
+      return `<tr><td>${fn}</td><td>${entrada}</td><td>${esperado}</td><td>${obtenido}</td><td class="r">${marca(obtenido === esperado)}</td></tr>`;
+    }).join('');
+
+    document.getElementById('t-casos').innerHTML = CASOS_CLINICOS.map(c => {
+      let r;
+      try { r = NEWS2.calcular(c.signos); } catch (e) { r = { total: 'Error', riesgo: { nivel: e.message } }; }
+      const ok = r.total === c.total && r.riesgo && r.riesgo.nivel === c.nivel;
+      return `<tr><td>${c.nombre}</td><td>${c.total} · ${c.nivel}</td><td>${r.total} · ${r.riesgo ? r.riesgo.nivel : '—'}</td><td class="r">${marca(ok)}</td></tr>`;
+    }).join('');
+
+    const resumen = document.getElementById('resumen');
+    resumen.textContent = `${pasan} de ${total} pruebas pasan`;
+    resumen.className = 'resumen ' + (pasan === total ? 'ok' : 'mal');
+  </script>
+</body>
+</html>
